@@ -30,8 +30,12 @@ img{
   min-height: 30%;
 }
 
+.minwidth100{
+  min-width: 100%;
+}
+
 .test-height{
-  min-height: 30vh;
+  min-height: 15vh;
 }
 
 .offcanvas-end{
@@ -40,4 +44,16 @@ img{
 
 .storeButton{
   margin-right: 20px;
+}
+
+.store-label{
+  font-size: x-small;
+}
+
+.accent-bar{
+  background-color: yellow;
+  min-width: 3px;
+  min-height: 8px;
+  margin: 1rem;
+  height: 3rem;
 }

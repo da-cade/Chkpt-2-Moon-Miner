@@ -44,7 +44,7 @@ img{
 }
 
 .offcanvas-end{
-  width: 200px!important;
+  width: 215px!important;
 }
 
 .upgrade-menu{
@@ -65,4 +65,7 @@ img{
   min-height: 8px;
   margin: 1rem;
   height: 3rem;
+}
+.accent-bar.small{
+  height: 2rem;
 }

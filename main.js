@@ -10,6 +10,8 @@
 //automatic upgrade type
 // When a user purchases an upgrade, the price of the upgrade increases
 
+
+
 let autos = {
   x : {
     name: "mystery", img: "url(image)", multiplier: 1, price: 50, quantity: 0, type: "auto", id: "x",},

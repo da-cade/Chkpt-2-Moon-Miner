@@ -44,20 +44,57 @@ let autoClickerCount = 0
       //     }
       //   }
       // }
+
+function lights(){
+  let glowElem = document.getElementsByClassName('bg-glow')
+}
+
+function dimLights(color){
+  let dimmer = document.querySelector(".dim-lights")
+  dimmer.style.background = color
+}
+
+function playAudio(input, time){
+  let audioElem = document.getElementById(input)
+  audioElem.currentTime = time
+  audioElem.play()
+}
+
+function introduction(){
+  switch(cheese){
+    case 1:
+      playAudio('harder', 0)
+      dimLights("var(--bg-one)")
+      break;
+    case 2:
+      playAudio('better', 0)
+      dimLights("var(--bg-two)")
+      break;
+      // #2E305E
+    case 3:
+      playAudio('faster', 0)
+      dimLights("var(--bg-three)")
+      // #2D2F5E
+      break;
+    case 4:
+      playAudio('stronger', 0)
+      dimLights("var(--bg-four)")
+      break;
+    case 5:
+      playAudio('hbfs', 12)
+      break;
+  }
+}
       
 function startGame(){
   drawUpgrades()
 }
-// Users can click on an image to collect a resource [x]
-      
-// Every time you click, the properly calculated amount of cheese is added to bank [x]
-
-
 
 function clicker(){
   cheese += baseClick
   totalClicks += 1
-  writeTotals()
+  writeStats()
+  introduction()
 }
 
 function drawUpgrades(upgrade){
@@ -67,7 +104,7 @@ function drawUpgrades(upgrade){
     <i class="mdi mdi-disc"></i>
     <div class="d-flex justify-content-between w-100 mb-1">
       <p class="m-0 ms-1" id="upgrade-name">${upgrade.name}</p>
-      <p class="m-0 me-4" id="upgrade-quantity">${upgrade.quantity}</p>
+      <p class="m-0 me-4" id="upgrade-quantity">${upgrade.quantity} ${upgrade.type}</p>
     </div>
   </div>`
 }
@@ -92,7 +129,7 @@ function tallyAutoUpgrades(){
   }
   cheese += collatedTotal
   autoClickerCount += collatedTotal
-  writeTotals()
+  writeStats()
 }
 
 function tallyAugmentUpgrades(){
@@ -105,12 +142,12 @@ function tallyAugmentUpgrades(){
     }
   }
   baseClick = collatedTotal
-  writeTotals()
+  writeStats()
 }
 
 // The current resource total is always displayed [x]
 
-function writeTotals(){
+function writeStats(){
   let totalClicksElem = document.getElementById('total-clicks')
   totalClicksElem.innerText = totalClicks
   let totalCheeseElem = document.getElementById('counter')
@@ -155,7 +192,7 @@ function buyItem(itemName){
       tallyAugmentUpgrades()
     }
   cheese -= itemName.price
-  writeTotals()
+  writeStats()
   priceIncreaser(itemName)
   drawUpgrades(itemName)
   }

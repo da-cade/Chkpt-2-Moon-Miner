@@ -1,8 +1,44 @@
+:root{
+  /* #ffffff, #C2C2D3, #4E4E81 ,#000030 */
+  --bg-one: #ccccdf;
+  --bg-two: #626277;
+  --bg-three: #343443;
+  --bg-four: #020210;
+}
+
+@font-face {
+  font-family: "alpha-rush";
+  src: url('./assets/Alpharush.ttf');
+}
+
+h2{
+  font-family: "alpha-rush";
+  font-size: 0pt;
+}
+
+h4{
+  font-family: "alpha-rush";
+  font-style: italic;
+}
+
+h5{
+  font-family: "alpha-rush";
+}
+
+h6{
+  font-family: "alpha-rush";
+}
+
+p{
+  font-family: "alpha-rush";
+}
+
 body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding-right: 0px!important;
+  background-color: white;
 }
 
 main{
@@ -11,7 +47,7 @@ main{
 
 img{
   object-fit: contain;
-  max-height: 50vh;
+  max-height: 60vh;
   min-width: auto;
 }
 
@@ -52,6 +88,7 @@ img{
 }
 
 .storeButton{
+  font-family: "alpha-rush";
   margin-right: 20px;
 }
 

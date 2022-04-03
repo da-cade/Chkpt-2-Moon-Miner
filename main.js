@@ -12,16 +12,16 @@
 
 let autos = {
   x : {
-    img: "url(image)", multiplier: 1, price: 50, quantity: 0, type: "auto", id: "x",},
+    name: "mystery", img: "url(image)", multiplier: 1, price: 50, quantity: 0, type: "auto", id: "x",},
   y : {   
-    img: "url(image)", multiplier: 3, price: 150, quantity: 0, type: "auto", id: "y",}
+    name: "y", img: "url(image)", multiplier: 3, price: 150, quantity: 0, type: "auto", id: "y",}
 }
 
 let augs = {
   u : {
-    img: "url(image)", multiplier: 1, price: 15, quantity: 0, type: "aug", id: "u",},
+    name: "u", img: "url(image)", multiplier: 1, price: 15, quantity: 0, type: "aug", id: "u",},
   v : {  
-    img: "url(image)", multiplier: 3, price: 60, quantity: 0, type: "aug", id: "v",}
+    name: "v", img: "url(image)", multiplier: 3, price: 60, quantity: 0, type: "aug", id: "v",}
 }
 
 let baseClick = 1
@@ -44,17 +44,35 @@ let autoClickerCount = 0
       // }
       
 function startGame(){
-
+  drawUpgrades()
 }
 // Users can click on an image to collect a resource [x]
       
 // Every time you click, the properly calculated amount of cheese is added to bank [x]
+
+
 
 function clicker(){
   cheese += baseClick
   totalClicks += 1
   writeTotals()
 }
+
+function drawUpgrades(upgrade){
+  let upgradeElem = document.getElementById("upgrade-list")
+  upgradeElem.innerHTML = /*html*/ `
+  <div class="d-flex align-items-center">
+    <i class="mdi mdi-disc"></i>
+    <div class="d-flex justify-content-between w-100 mb-1">
+      <p class="m-0 ms-1" id="upgrade-name">${upgrade.name}</p>
+      <p class="m-0 me-4" id="upgrade-quantity">${upgrade.quantity}</p>
+    </div>
+  </div>`
+}
+
+// function updateUpgrades(){
+
+// }
 
 function initializeAutoUpgrade(){
   setInterval(tallyAutoUpgrades, 3000)
@@ -69,7 +87,6 @@ function tallyAutoUpgrades(){
     if(item.quantity > 0){
       collatedTotal *= item.multiplier
     }
-    console.log("Automatic totals:", collatedTotal, 'quantity:', item.quantity, 'multiplier:', item.multiplier)
   }
   cheese += collatedTotal
   autoClickerCount += collatedTotal
@@ -85,7 +102,6 @@ function tallyAugmentUpgrades(){
       collatedTotal += item.multiplier
     }
   }
-  console.log("Augment totals: ", collatedTotal)
   baseClick = collatedTotal
   writeTotals()
 }
@@ -101,14 +117,9 @@ function writeTotals(){
   totalAutoClicksElem.innerText = autoClickerCount
 }
 
-function writeQuantities(itemName){
- console.log(itemName)
-}
-
 function checkForAutoUpgrades(itemName){
-  debugger
   itemName.quantity += 1
-  writeQuantities(itemName)
+  // writeQuantities(itemName)
   if(itemName.type === "auto"){
     let totalUpgrades = 0
     for (let key in autos) {
@@ -144,6 +155,7 @@ function buyItem(itemName){
   cheese -= itemName.price
   writeTotals()
   priceIncreaser(itemName)
+  drawUpgrades(itemName)
   }
   //TODO Styling -- make into sweet alert
   else{console.log("You cannot afford this upgrade")}

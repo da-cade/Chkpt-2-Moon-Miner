@@ -2,6 +2,7 @@ body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-right: 0px!important;
 }
 
 main{
@@ -18,8 +19,12 @@ img{
   cursor: pointer;
 }
 
-.full-height{
-  height: 100vh;
+.h-85{
+  min-height: 85vh;
+}
+
+.h-15{
+  min-height: 15vh;
 }
 
 /* this style may need to change */
@@ -40,6 +45,10 @@ img{
 
 .offcanvas-end{
   width: 200px!important;
+}
+
+.upgrade-menu{
+  max-height: 42vh;
 }
 
 .storeButton{

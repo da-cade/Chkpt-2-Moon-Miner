@@ -1,5 +1,6 @@
 :root{
   /* #ffffff, #C2C2D3, #4E4E81 ,#000030 */
+  --og-light: #f9f5f5;
   --bg-one: #ccccdf;
   --bg-two: #626277;
   --bg-three: #343443;
@@ -19,18 +20,26 @@ h2{
 h4{
   font-family: "alpha-rush";
   font-style: italic;
+  color: var(--og-light);
 }
 
 h5{
   font-family: "alpha-rush";
+  color: var(--og-light);
 }
 
 h6{
   font-family: "alpha-rush";
+  color: var(--og-light);
 }
 
 p{
   font-family: "alpha-rush";
+  color: var(--og-light);
+}
+
+ul{
+  color: var(--og-light);
 }
 
 body{
@@ -38,7 +47,7 @@ body{
   flex-direction: column;
   min-height: 100vh;
   padding-right: 0px!important;
-  background-color: white;
+  background-color: var(--og-light);
 }
 
 main{
@@ -51,8 +60,17 @@ img{
   min-width: auto;
 }
 
+.clerk{
+  max-height: 40vh;
+}
+
+
 .main-image{
   cursor: pointer;
+}
+
+.main-image:active{
+  box-shadow: 0 0 40px orange;
 }
 
 .h-85{
@@ -79,25 +97,79 @@ img{
   min-height: 15vh;
 }
 
+.offcanvas{
+  background-color: var(--bg-four);
+}
+
+.offcanvas-header{
+  padding-bottom: 0rem;
+}
+
+.offcanvas-body{
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
 .offcanvas-end{
   width: 215px!important;
 }
-
 .upgrade-menu{
   max-height: 42vh;
 }
 
-.storeButton{
+.tab{
+  display: inline-block;
+  font-weight: 400;
   font-family: "alpha-rush";
-  margin-right: 20px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--og-light);
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.tab:hover{
+  color: white;
+  box-shadow: 0 0 15px rgba(93, 249, 249, 0.899);
+}
+
+.shopClerk{
+  max-height: 30vh;
+  max-width: auto;
+}
+
+.storeButton{
+  background-color: var(--bg-four);
+  border: none;
+}
+
+.shopClerk:active{
+  box-shadow: 0 0 20px rgba(93, 249, 249, 0.899);
+}
+
+.fake-hr{
+  background-color: var(--og-light);
+  min-height: 1px;
+  min-width: 100%;
 }
 
 .store-label{
-  font-size: x-small;
+  font-size: smaller;
 }
 
 .accent-bar{
-  background-color: yellow;
+  background-color: var(--og-light);
   min-width: 3px;
   min-height: 8px;
   margin: 1rem;

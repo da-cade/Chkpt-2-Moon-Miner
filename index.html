@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body class="dim-lights">
   <audio src="./assets/harder.mp3" type="audio/mpeg" id="harder"></audio>
   <audio src="./assets/better.mp3" type="audio/mpeg" id="better"></audio>
@@ -32,24 +33,31 @@
         <div class="col-4">
           <!-- side menus -->
           <div class="row h-50">
-            <div class="col">
-              <h4>Upgrades</h4>
-              <div class ="upgrade-menu" id="upgrade-list">
-                <!-- Owned upgrades are drawn here -->
+            <div class="col g-0">
+              <div class="ms-4">
+                <h4>Upgrades</h4>
+                <div class ="upgrade-menu" id="upgrade-loop-pedal">
+                  <!-- Owned upgrades are drawn here -->
+                </div>
+                <div class ="upgrade-menu" id="upgrade-robotic-harmonic-insight"></div>
+                <div class ="upgrade-menu" id="upgrade-fog-machine"></div>
+                <div class ="upgrade-menu" id="upgrade-nuclear-synthesizer"></div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <h4>Stats</h4>
-              <ul>
-                <li>
-                  <h6 class="m-0">Total Clicks: <span id="total-clicks">0</span></h6>
-                </li>
-                <li>
-                  <p class="m-0">Auto Clicks: <span id="auto-clicks">0</span></p>
-                </li>
-              </ul>
+              <div class="ms-4">
+                <h4>Stats</h4>
+                <ul>
+                  <li>
+                    <h6 class="m-0">Total Clicks: <span id="total-clicks">0</span></h6>
+                  </li>
+                  <li>
+                    <p class="m-0">Auto Clicks: <span id="auto-clicks">0</span></p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -66,7 +74,7 @@
           </div>
           <div class="row">
             <div class="col d-flex justify-content-center">
-              <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center mt-1">
                 <!-- TODO fix accent bars -->
                 <div class="accent-bar"></div>
                 <div class="d-flex flex-column align-items-center text-center text-nowrap mx-2">
@@ -79,54 +87,54 @@
         </div>
         <!-- offcanvas -->
         <div class="col-4">
-          <div class="">
-            <button class="btn btn-warning storeButton" type="button" data-bs-toggle="offcanvas"
-              data-bs-target="#storeMenu" aria-controls="storeMenu">Store Menu</button>
+          <div id="button-spot">
           </div>
           <div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="storeMenu"
             aria-labelledby="storeMenuLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="storeMenuLabel">Store</h5>
-              <button type="button" class="btn-close bg-warning text-reset" data-bs-dismiss="offcanvas"
+              <button type="button" class="tab-close bg-warning text-reset" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-              <div class="test-height mb-5">
+              <div class="d-flex test-height justify-content-center">
                 <!-- TODO image needed here -->
-                <img src="url()" alt="">
+                <img class="clerk" src="./assets/shopclerk.webp" alt="shop_clerk">
               </div>
-              <hr>
+              <div class="d-flex w-100 justify-content-center">
+                <div class="fake-hr"></div>
+              </div>
               <div class="d-flex minheight-30 justify-content-center">
                 <div class="container-fluid g-0">
                   <div class="row w g-0" id="store-item">
                     <div class="col d-flex flex-wrap" >
                       <div class="store-item d-flex align-items-center m-2">
                         <div class="accent-bar small m-0 me-2"></div>
-                        <button class="btn bg-dark text-light p-0" onclick="buyItem(augs.u)">
-                          <span id="x">15</span>
+                        <button class="tab bg-dark text-light p-0" onclick="buyItem(augs.loopPedal)">
+                          <span id="loop-pedal">15</span>
                         </button>
-                        <p class="store-label m-0 ms-2">Auto X</p>
+                        <p class="store-label m-0 ms-2">Loop Pedal</p>
                       </div>
                       <div class="store-item d-flex align-items-center m-2">
                         <div class="accent-bar small m-0 me-2"></div>
-                        <button class="btn bg-dark text-light p-0" onclick="buyItem(autos.x)">
-                          <span id="x">50</span>
+                        <button class="tab bg-dark text-light p-0" onclick="buyItem(autos.roboticHarmonicInsight)">
+                          <span id="robotic-harmonic-insight">50</span>
                         </button>
-                        <p class="store-label m-0 ms-2">Auto X</p>
+                        <p class="store-label m-0 ms-2">Robotic Harmonic Insight</p>
                       </div>
                       <div class="store-item d-flex align-items-center m-2">
                         <div class="accent-bar small m-0 me-2"></div>
-                        <button class="btn bg-dark text-light p-0" onclick="buyItem(augs.v)">
-                          <span id="x">60</span>
+                        <button class="tab bg-dark text-light p-0" onclick="buyItem(augs.fogMachine)">
+                          <span id="fog-machine">60</span>
                         </button>
-                        <p class="store-label m-0 ms-2">Auto X</p>
+                        <p class="store-label m-0 ms-2">Fog Machine</p>
                       </div>
                       <div class="store-item d-flex align-items-center m-2">
                         <div class="accent-bar small m-0 me-2"></div>
-                        <button class="btn bg-dark text-light p-0" onclick="buyItem(autos.y)">
-                          <span id="x">150</span>
+                        <button class="tab bg-dark text-light p-0" onclick="buyItem(autos.nuclearSynthesizer)">
+                          <span id="nuclear-synthesizer">150</span>
                         </button>
-                        <p class="store-label m-0 ms-2">Auto X</p>
+                        <p class="store-label m-0 ms-2">Nuclear Synthesizer</p>
                       </div>
                     </div>
                   </div>

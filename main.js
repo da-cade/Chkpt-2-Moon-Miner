@@ -13,37 +13,42 @@
 
 
 let autos = {
-  x : {
-    name: "mystery", img: "url(image)", multiplier: 1, price: 50, quantity: 0, type: "auto", id: "x",},
-  y : {   
-    name: "y", img: "url(image)", multiplier: 3, price: 150, quantity: 0, type: "auto", id: "y",}
+  roboticHarmonicInsight : {
+    name: "Robotic Harmonic Insight", img: "url(image)", multiplier: 1, 
+    price: 50, quantity: 0, type: "auto", id: "robotic-harmonic-insight",},
+  
+  nuclearSynthesizer : {   
+    name: "Nuclear Synthesizer", img: "url(image)", multiplier: 3, 
+    price: 150, quantity: 0, type: "auto", id: "nuclear-synthesizer",}
 }
 
 let augs = {
-  u : {
-    name: "u", img: "url(image)", multiplier: 1, price: 15, quantity: 0, type: "aug", id: "u",},
-  v : {  
-    name: "v", img: "url(image)", multiplier: 3, price: 60, quantity: 0, type: "aug", id: "v",}
+  loopPedal : {
+    name: "Loop Pedal", img: "url(image)", multiplier: 1, 
+    price: 15, quantity: 0, type: "augment", id: "loop-pedal",},
+  
+  fogMachine : {  
+    name: "Fog Machine", img: "url(image)", multiplier: 3, 
+    price: 60, quantity: 0, type: "augment", id: "fog-machine",}
 }
 
 let baseClick = 1
-let cheese = 0
+let jams = 0
 let totalClicks = 0
 let autoClickerCount = 0
 
 
-
-// function finder(upgradeItem){
-  //   let found = {}
-  //   for (let key in dict){
-    //     let value = dict[key]
-    //     found = value.find(u => upgradeItem === u.name)
-    //     if (found){
-      //       console.log(found, 'found')
-      //       return found
-      //     }
-      //   }
-      // }
+function changeElements(color){
+  let bars = document.querySelectorAll(".accent-bar")
+  console.log(bars)
+  bars.forEach(element => {
+    element.style.background = color
+  });
+  // for (const key in bars) {
+  //   const element = object[key];
+  //   element.style.background = color
+  // }
+}
 
 function lights(){
   let glowElem = document.getElementsByClassName('bg-glow')
@@ -61,7 +66,7 @@ function playAudio(input, time){
 }
 
 function introduction(){
-  switch(cheese){
+  switch(totalClicks){
     case 1:
       playAudio('harder', 0)
       dimLights("var(--bg-one)")
@@ -81,37 +86,63 @@ function introduction(){
       dimLights("var(--bg-four)")
       break;
     case 5:
-      playAudio('hbfs', 12)
+      playAudio('hbfs', 20)
+      drawButton()
+      changeElements('yellow')
       break;
+    default:
+      console.log(jams)
   }
 }
       
-function startGame(){
-  drawUpgrades()
-}
+// function startGame(){
+//   drawUpgrades()
+// }
 
 function clicker(){
-  cheese += baseClick
+  jams += baseClick
   totalClicks += 1
   writeStats()
   introduction()
 }
 
-function drawUpgrades(upgrade){
-  let upgradeElem = document.getElementById("upgrade-list")
-  upgradeElem.innerHTML = /*html*/ `
-  <div class="d-flex align-items-center">
-    <i class="mdi mdi-disc"></i>
-    <div class="d-flex justify-content-between w-100 mb-1">
-      <p class="m-0 ms-1" id="upgrade-name">${upgrade.name}</p>
-      <p class="m-0 me-4" id="upgrade-quantity">${upgrade.quantity} ${upgrade.type}</p>
-    </div>
-  </div>`
+function drawButton(){
+  let buttonSpot = document.getElementById("button-spot")
+  buttonSpot.innerHTML = `
+    <button class="storeButton" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#storeMenu" aria-controls="storeMenu"><img class="shopClerk" src="./assets/shopclerk.webp" alt="shop_clerk"></button>`
 }
 
-// function updateUpgrades(){
+function drawUpgrades(upgrade){
+  debugger
+  let tempId = ""
+  let template = ""
+  console.log(upgrade, upgrade.quantity)
+  if (upgrade.quantity === 1){
+    template += /*html*/ `
+    <div class="d-flex align-items-center">
+      <i class="mdi mdi-disc"></i>
+      <div class="d-flex w-100 mb-1 justify-content-between">
+        <p class="m-0" id="upgrade-name">${upgrade.name}</p>
+        <p class="m-0"><span id="quantity-${upgrade.id}">${upgrade.quantity}</span> ${upgrade.type}</p>
+      </div>
+    </div>`
+    tempId = "upgrade-" + upgrade.id
+    let upgradeElem = document.getElementById(tempId)
+    upgradeElem.innerHTML = template
+  }
+  else{
+    updateUpgrades(upgrade)
+  }
+}
 
-// }
+function updateUpgrades(upgrade){
+  fullId = 'quantity-' + upgrade.id
+  let upgradeQuantity = document.getElementById(fullId)
+  console.log(fullId)
+  console.log(upgradeQuantity)
+  upgradeQuantity.innerText = upgrade.quantity
+}
 
 function initializeAutoUpgrade(){
   setInterval(tallyAutoUpgrades, 3000)
@@ -127,7 +158,7 @@ function tallyAutoUpgrades(){
       collatedTotal *= item.multiplier
     }
   }
-  cheese += collatedTotal
+  jams += collatedTotal
   autoClickerCount += collatedTotal
   writeStats()
 }
@@ -150,15 +181,13 @@ function tallyAugmentUpgrades(){
 function writeStats(){
   let totalClicksElem = document.getElementById('total-clicks')
   totalClicksElem.innerText = totalClicks
-  let totalCheeseElem = document.getElementById('counter')
-  totalCheeseElem.innerText = cheese
+  let totalJamsElem = document.getElementById('counter')
+  totalJamsElem.innerText = jams
   let totalAutoClicksElem = document.getElementById('auto-clicks')
   totalAutoClicksElem.innerText = autoClickerCount
 }
 
 function checkForAutoUpgrades(itemName){
-  itemName.quantity += 1
-  // writeQuantities(itemName)
   if(itemName.type === "auto"){
     let totalUpgrades = 0
     for (let key in autos) {
@@ -169,7 +198,6 @@ function checkForAutoUpgrades(itemName){
       initializeAutoUpgrade()
     }
     autoClickerCount = totalUpgrades
-    console.log(autoClickerCount)
   }
 }
 
@@ -179,22 +207,24 @@ function priceIncreaser(itemName){
 }
 
 function priceWriter(itemName){
-  console.log(itemName)
   let priceElem  = document.getElementById(itemName.id)
   priceElem.innerText = itemName.price
-  console.log(itemName.price)
 }
 
 function buyItem(itemName){
-  if(cheese >= itemName.price){
+  if(jams >= itemName.price){
+    itemName.quantity += 1
+    console.log(itemName, itemName.quantity)
     checkForAutoUpgrades(itemName)
-    if (itemName.type === "aug"){
+    if (itemName.type === "augment"){
       tallyAugmentUpgrades()
     }
-  cheese -= itemName.price
+  jams -= itemName.price
   writeStats()
   priceIncreaser(itemName)
   drawUpgrades(itemName)
+  // updateUpgrades(itemName)
+
   }
   //TODO Styling -- make into sweet alert
   else{console.log("You cannot afford this upgrade")}
@@ -214,12 +244,12 @@ function buttonEnabler(button){
   //     baseAutoClick += itemName.multiplier
   //   } 
   // }else{baseAutoClick *= itemName.multiplier}
-  // if(itemName.type === "aug"){
+  // if(itemName.type === "augment"){
   //   baseClick *= itemName.multiplier
   // }
 
 // Users cannot purchase an upgrade if they do not have enouugh resource
-// use a conditional that checks 'cheese'
+// use a conditional that checks 'jams'
 
 
 
